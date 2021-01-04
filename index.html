@@ -12,24 +12,25 @@
         <h1>План по изучению Vue.js</h1>
 
         <div class="steps">
-          <div class="steps-content">{{item.text}}</div>
+          <div class="steps-content">{{currentItem.text}}</div>
           <ul class="steps-list">
             <li
               class="steps-item"
               v-for="(item, idx) in steps"
               :class="activeIndex > idx ? 'done': '', activeIndex == idx ? 'active': ''"
+							@click="setActive(idx)"
             >
               <span>{{idx + 1}}</span> {{item.title}}
             </li>
           </ul>
-          <div v-if="activeIndex < steps.length">
+          <div v-show="!show">
             <button class="btn" :disabled="activeIndex === 0" @click="prev">
               Назад
             </button>
             <button
               class="btn primary"
               @click="nextOfFinish"
-              v-if="activeIndex !== steps.length-1"
+              v-if="currentStep < steps.length"
             >
               Вперед
             </button>
@@ -37,7 +38,7 @@
               Завершить
             </button>
           </div>
-          <div v-else>
+          <div v-show="show">
             <button class="btn" @click="reset">Начать заново</button>
           </div>
         </div>
