@@ -30,12 +30,7 @@
             <button
               class="btn primary"
               @click="nextOfFinish"
-              v-if="currentStep < steps.length"
-            >
-              Вперед
-            </button>
-            <button v-else class="btn primary" @click="nextOfFinish">
-              Завершить
+            > {{ this.isLastStep ? 'Завершить' : 'Вперед' }}
             </button>
           </div>
           <div v-show="finished">

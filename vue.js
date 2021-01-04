@@ -76,7 +76,7 @@ const App = {
     },
     isPrevButtonDisabled () {
      return this.activeIndex === 0
-    }
+    },
   },
 }
 
