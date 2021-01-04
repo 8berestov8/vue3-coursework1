@@ -1,54 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>Основы Vue</title>
-	<link rel="stylesheet" href="theme.css"/>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Основы Vue</title>
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body>
+    <div class="container" id="app">
+      <div class="card">
+        <h1>План по изучению Vue.js</h1>
 
-<div class="container" id="app">
-	<div class="card">
-		<h1>План по изучению Vue.js</h1>
+        <div class="steps">
+          <div class="steps-content">{{item.text}}</div>
+          <ul class="steps-list">
+            <li
+              class="steps-item"
+              v-for="(item, idx) in steps"
+              :class="activeIndex > idx ? 'done': '', activeIndex == idx ? 'active': ''"
+            >
+              <span>{{idx + 1}}</span> {{item.title}}
+            </li>
+          </ul>
+          <div v-if="activeIndex < steps.length">
+            <button class="btn" :disabled="activeIndex === 0" @click="prev">
+              Назад
+            </button>
+            <button
+              class="btn primary"
+              @click="nextOfFinish"
+              v-if="activeIndex !== steps.length-1"
+            >
+              Вперед
+            </button>
+            <button v-else class="btn primary" @click="nextOfFinish">
+              Завершить
+            </button>
+          </div>
+          <div v-else>
+            <button class="btn" @click="reset">Начать заново</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-		<div class="steps">
-			<div class="steps-content">
-				{{item.text}}
-			</div>
-			<ul class="steps-list">
-				<li class="steps-item"
-						v-for="(item, idx) in steps"
-						:class="activeIndex > idx ? 'done': '', activeIndex == idx ? 'active': ''"
-				><span>{{idx + 1}}</span> {{item.title}}
-				</li>
-			</ul>
-			<div v-if="activeIndex < steps.length">
-				<button class="btn"
-								:disabled="activeIndex === 0"
-								@click="prev"
-				>Назад</button>
-				<button class="btn primary"
-								@click="nextOfFinish"
-								v-if="activeIndex !== steps.length-1"
-				>Вперед
-				</button>
-				<button v-else class="btn primary"
-								@click="nextOfFinish"
-				>Завершить
-				</button>
-			</div>
-			<div v-else>
-				<button class="btn "
-								@click="reset"
-				>Начать заново
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script src="https://unpkg.com/vue@next"></script>
-<script src="vue.js"></script>
-</body>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="vue.js"></script>
+  </body>
 </html>
