@@ -72,7 +72,7 @@ const App = {
       return this.steps[this.activeIndex]
     },
     isLastStep () {
-      return this.currentItem === this.steps[this.steps.length - 1]
+      return this.currentStep === this.steps.length
     },
     isPrevButtonDisabled () {
      return this.activeIndex === 0
