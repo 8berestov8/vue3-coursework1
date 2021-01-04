@@ -33,12 +33,10 @@ const App = {
             'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.',
         },
       ],
-      show: false,
+      finished: false,
     }
   },
   methods: {
-
-
     prev() {
       // когда нажимаем кнопку назад
       this.activeIndex--
@@ -46,20 +44,16 @@ const App = {
     },
     reset() {
       // начать заного
-      this.show = false
+      this.finished = false
       this.activeIndex = 0
-
-
     },
     nextOfFinish() {
       // кнопка вперед или закончить
-
-      if (this.currentStep !== this.steps.length) {
+      if (!this.isLastStep) {
         this.activeIndex++
       } else {
-        this.show = true
+        this.finished = true
       }
-
     },
     setActive(idx) {
       // когда нажимаем на определенный шаг
@@ -77,6 +71,12 @@ const App = {
     currentItem() {
       return this.steps[this.activeIndex]
     },
+    isLastStep () {
+      return this.currentItem === this.steps[this.steps.length - 1]
+    },
+    isPrevButtonDisabled () {
+     return this.activeIndex === 0
+    }
   },
 }
 
